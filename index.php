@@ -33,16 +33,22 @@
 
     <!-- Header -->
     <header>
-        <div class="help_header_main"></div>
+        <div class="help_header_main">
+            <div class="help_header_main-all">
+                <div class="help_header_name">Helper</div>
+
+                <div class="help_header_search">
+                    <p class="help_h2">Autocomplete</p>
+                    <input id="autocomplete" title="type">
+                    <div class="search">Поиск</div>
+                </div>
+            </div>
+        </div>
     </header>
     <!-- EndHeader -->
 
     <!-- Autocomplete -->
-    <h2 class="help_h2">Autocomplete</h2>
 
-    <div>
-        <input id="autocomplete" title="type">
-    </div>
 
 
 
