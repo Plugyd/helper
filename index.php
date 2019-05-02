@@ -14,9 +14,6 @@
 	    fclose($File);
 	  }
     }
-    
-  
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,13 +30,10 @@
 </head>
 
 <body>
-
-    <!-- Header -->
     <header>
         <div class="help_header_main">
             <div class="help_header_main-all">
                 <div class="help_header_name">Helper</div>
-
                 <div class="help_header_search">
                     <p class="help_h2">Autocomplete</p>
                     <input id="autocomplete" title="type">
@@ -48,35 +42,20 @@
             </div>
         </div>
     </header>
-    <!-- EndHeader -->
     <main>
         <div class="help_main_main">
-
-            <h2>Listings: 543</h2>
             <div class="help_main_main_all">
+                <div class='replace-word'></div>
+                <div class="help_main_result">
+                </div>
             </div>
         </div>
     </main>
-    <!-- Autocomplete -->
-    <?
 
-
-//     use Core\Store;
-
-// 		Store::Prepare('SELECT id FROM listing WHERE (tags = ?) ');
-// 		Store::BindValue(1, $_POST['query'], PDO::PARAM_INT);
-// 		Store::Execute();
-// 		$Data = Store::RowCount();
-// var_dump($Data);
-  ?>
-
-    <!-- Footer -->
-
-    <!-- Script -->
+    <script src="js/prism.js"></script>
     <script src="js/jquery-3.4.0.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/prism.js"></script>
 
 </body>
 

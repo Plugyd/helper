@@ -1,9 +1,12 @@
-$(document).on('click', '.search', function () {
-    
-    event.preventDefault();
-    error = 0;
+function find(word) {
 
-    var query = $('#autocomplete').val();
+    if (word === undefined) {
+        var query = $('#autocomplete').val();
+    } else {
+        var query = word;
+    }
+
+    $('.replace-word').html("Возможно вы искали: <span class='find_replace'>" + Auto(query) + "</span>");
 
     $.ajax({
         url: '/ajax/find.php',
@@ -12,91 +15,87 @@ $(document).on('click', '.search', function () {
         data: {
             query: query,
             start: 0,
-            limit: 25
+            limit: 50
         },
         success: Success,
         beforeSend: Before
     });
 
     function Success(data) {
-     
-
-        console.log(data);
+        $('.help_main_result').html(data);
+        Prism.highlightAll()
     }
 
     function Before() {
-    console.log(query);
+        // TODO: Сделать загрузку 
     }
+}
 
-
-
+$(document).on('click', '.search', function () {
+    find();
 });
 
-
-var availableTags = [
-    "ActionScript",
-    "AppleScript",
-    "Asp",
-    "BASIC",
-    "C",
-    "C++",
-    "Clojure",
-    "COBOL",
-    "ColdFusion",
-    "Erlang",
-    "Fortran",
-    "Groovy",
-    "Haskell",
-    "Java",
-    "JavaScript",
-    "Lisp",
-    "Perl",
-    "PHP",
-    "Python",
-    "Ruby",
-    "Scala",
-    "Scheme"
-];
+$(document).on('click', '.find_replace', function () {
+    var rword = $(".find_replace").text();
+    $("#autocomplete").val(rword);
+    find(rword);
+});
 
 $("#autocomplete").autocomplete({
-    source: availableTags
+    source: function (request, response) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/ajax/findword.php',
+            data: {
+                maxRows: 20,
+                word: request.term
+            },
+            success: function (data) {
+                console.log(data);
+                response(data);
+            }
+        });
+    },
+    minLength: 3
 });
-
-$(".listing").dblclick(function () {
-
-
-
-
+$(document).on('dblclick', '.listing', function () {
     if ($(this).hasClass('opens')) {
         $(".listing").removeClass("opens");
     } else {
         $(".listing").removeClass("opens");
         $(this).addClass("opens");
     }
-
-
-
     var id = $(this).attr('id');
     var target = document.getElementById(id);
     $('html, body').animate({
         scrollTop: $(target).offset().top
     }, 1000);
-
-
-
 });
 
-// $(".open").on('click', function () {
-//     $(this).toggleClass("opens")
-//     if ($(this).hasClass('opens')) {
-//         $(this).parent().css({
-//             "height": "500px"
-//         });
-//     } else {
-//         $(this).parent().css({
-//             "height": "auto"
-//         });
-//     }
+function Auto(str) {
+    var search = new Array(
+        "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ",
+        "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э",
+        "я", "ч", "с", "м", "и", "т", "ь", "б", "ю"
+    );
+    var replace = new Array(
+        "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "\\[", "\\]",
+        "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'",
+        "z", "x", "c", "v", "b", "n", "m", ",", "\\."
+    );
 
+    for (var i = 0; i < replace.length; i++) {
+        var reg = new RegExp(replace[i], 'mig');
+        str = str.replace(reg, function (a) {
+            return a == a.toLowerCase() ? search[i] : search[i].toUpperCase();
+        })
+    }
+    return str
+}
 
-// });
+$('#autocomplete').keydown(function (e) {
+    if (e.keyCode === 13) {
+        find();
+    }
+});

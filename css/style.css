@@ -9,9 +9,32 @@ header {
     z-index: 1;
 }
 
+.help_main_result {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.listing_res {
+    width: 100%;
+    padding: 10px 30px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
 .opens {
     height: auto !important;
     width: 100% !important;
+}
+
+.replace-word {
+    padding: 0 30px;
+    font-size: 14px;
+}
+
+span.find_replace {
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .search {
@@ -83,7 +106,7 @@ main {
     max-width: 1160px;
     margin: 0 auto;
     padding: 0 20px;
-    margin-top: 90px;
+    margin-top: 20px;
 }
 
 input#autocomplete {
@@ -140,9 +163,9 @@ input#autocomplete {
 }
 
 .help_main_main_all {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
 }
 
 .type {
