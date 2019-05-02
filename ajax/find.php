@@ -2,7 +2,6 @@
     spl_autoload_register(function ($Class) {
         include  'class/' .  str_replace('\\', '/', $Class) . '.php';
     });
-    sleep(2);
     use Core\Store;
     Core\Store::Init();
     Store::Prepare('SELECT * FROM listing WHERE 

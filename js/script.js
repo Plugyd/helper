@@ -30,7 +30,6 @@ function find(word) {
     }
 
     function Before() {
-     
         $('.help_main_result').html('<p class="load">Загрузка...<p>')
     }
 }
