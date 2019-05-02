@@ -1,6 +1,6 @@
 <?
 	set_error_handler('EHandler');
-
+    define('SITE_PATH',$_SERVER["DOCUMENT_ROOT"]);
 	function EHandler($ErrorNum, $ErrorMsg, $FileName, $LineError) 
 	{
 	  $Date = date('Y-m-d H:i:s (T)');
@@ -15,6 +15,8 @@
 	  }
     }
     
+  
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +29,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/prism.css">
 </head>
 
 <body>
@@ -40,17 +43,32 @@
                 <div class="help_header_search">
                     <p class="help_h2">Autocomplete</p>
                     <input id="autocomplete" title="type">
-                    <div class="search">Поиск</div>
+                    <div class="search" name="search">Поиск</div>
                 </div>
             </div>
         </div>
     </header>
     <!-- EndHeader -->
+    <main>
+        <div class="help_main_main">
 
+            <h2>Listings: 543</h2>
+            <div class="help_main_main_all">
+            </div>
+        </div>
+    </main>
     <!-- Autocomplete -->
+    <?
 
 
+//     use Core\Store;
 
+// 		Store::Prepare('SELECT id FROM listing WHERE (tags = ?) ');
+// 		Store::BindValue(1, $_POST['query'], PDO::PARAM_INT);
+// 		Store::Execute();
+// 		$Data = Store::RowCount();
+// var_dump($Data);
+  ?>
 
     <!-- Footer -->
 
@@ -58,6 +76,7 @@
     <script src="js/jquery-3.4.0.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/prism.js"></script>
 
 </body>
 
