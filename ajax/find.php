@@ -2,7 +2,7 @@
     spl_autoload_register(function ($Class) {
         include  'class/' .  str_replace('\\', '/', $Class) . '.php';
     });
-
+    sleep(2);
     use Core\Store;
     Core\Store::Init();
     Store::Prepare('SELECT * FROM listing WHERE 
@@ -22,11 +22,19 @@
 <div class="listing_res">Результаты: <?=$Counts?> </div>
 
 <? foreach ($Data as $Listing) :?>
-    <div class="listing" id="<?=$Listing['id']?>">
-        <div class="type"><span><?=$Listing['types']?></span> </div>
-        <div class="listing_name"><?=$Listing['titles']?></div>
-        <div class="listing_desc"><?=$Listing['descr']?></div>
-        <div class="listing_tags"><span><?=$Listing['tags']?></span></div>
-        <pre><code class="language-<?=$Listing['types']?>"><?=$Listing['code']?></code></pre>
-    </div>
- <? endforeach;?>
+<? $Tags = explode(",", $Listing['tags']); ?>
+  <div class="listing" id="listing<?=$Listing['id']?>">
+  <div class="type"><span><?=strtoupper($Listing['types'])?></span> </div>
+  <div class="copy" onclick="CopyToClipboard('#copy<?=$Listing['id']?>')">Копировать код</div>
+  <div class="listing_name"><?=$Listing['titles']?></div>
+  <div class="listing_desc"><?=$Listing['descr']?></div>
+  <div class="listing_tags">
+    <?foreach ($Tags as $Span){echo "<span>#".$Span."</span>";}?>
+  </div>
+  <div class="body-listing">
+    <pre><code class="language-<?=$Listing['types']?>"><?=$Listing['code']?></code></pre>
+    <textarea class="textcopy autosizes" code="<?=$Listing['id']?>"
+      id="copy<?=$Listing['id']?>"> <?=$Listing['code']?> </textarea>
+  </div>
+</div>
+<? endforeach;?>

@@ -1,3 +1,5 @@
+autosize(document.getElementsByClassName('autosizes'));
+
 function find(word) {
 
     if (word === undefined) {
@@ -23,17 +25,45 @@ function find(word) {
 
     function Success(data) {
         $('.help_main_result').html(data);
-        Prism.highlightAll()
+        Prism.highlightAll();
+        autosize(document.getElementsByClassName('autosizes'));
     }
 
     function Before() {
-        // TODO: Сделать загрузку 
+     
+        $('.help_main_result').html('<p class="load">Загрузка...<p>')
     }
+}
+
+function message(text){
+    $('.msg').fadeIn(500);
+    $('.msg').text(text);
+
+    setTimeout(function() {
+        $('.msg').fadeOut(1000);
+    }, 2000);
+   
+}
+
+function CopyToClipboard(el) {
+    $(el).select();
+    var code = $(el).attr('code');
+    console.log(code);
+    
+    document.execCommand("copy");
+    message("Код №"+code+" скопирован.");
 }
 
 $(document).on('click', '.search', function () {
     find();
 });
+
+
+$('#up').click(function() {
+    $('html, body').animate({scrollTop: 0},500);
+    return false;
+  })
+
 
 $(document).on('click', '.find_replace', function () {
     var rword = $(".find_replace").text();

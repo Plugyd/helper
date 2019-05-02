@@ -43,17 +43,24 @@
         </div>
     </header>
     <main>
+    <textarea class="textcopy autosizes" id="copy">  </textarea>
+  
         <div class="help_main_main">
             <div class="help_main_main_all">
                 <div class='replace-word'></div>
                 <div class="help_main_result">
+            
                 </div>
             </div>
         </div>
+        <div id="up" >Туда</div>
+        <div class="msg"></div>
+
     </main>
 
-    <script src="js/prism.js"></script>
     <script src="js/jquery-3.4.0.min.js"></script>
+    <script src="js/autosize.min.js"></script>
+    <script src="js/prism.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/script.js"></script>
 
